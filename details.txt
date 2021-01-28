@@ -1,0 +1,7 @@
+{
+    'SERVER_ADDRESS' :,
+    'LOGIN_ID': ,
+    'PASSWORD': ,
+    'FULL_DOMAIN_NAME: f'CN={loginID},OU=XXXX,OU=XXXX,DC=XX,DC=XXX,DC=XXX' ,
+    'SEARCH_QUERY': 'dc=XX,dc=XX,dc=XXX'
+}

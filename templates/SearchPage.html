@@ -1,0 +1,87 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- Custom script file -->
+  <!-- <script src="{{ url_for('static',filename='script.js') }}"></script> -->
+  <!-- Custom Style -->
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.js"
+    integrity="sha512-bYkaBWaFtfPIMYt9+CX/4DWgfrjcHinjerNYxQmQx1VM76eUsPPKZa5zWV8KksVkBF/DaHSADCwil2J5Uq2ctA=="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">Manage
+    users</button>
+
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">Search User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id='UserSearchform'>
+            <div class="form-group">
+              <label for="wwid" class="col-form-label">WWID</label>
+              <input type="text" class="form-control" id="wwid">
+              <label for="First-Name" class="col-form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName">
+              <label for="Last-Name" class="col-form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName">
+              <label for="Mail" class="col-form-label">Mail</label>
+              <input type="text" class="form-control" id="mail"><br>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button class="btn btn-success" id="search" onclick="submitSearchForm()">Search</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script>
+      function submitSearchForm() {
+
+        serialised = $('#UserSearchform input').map(function () {
+          x = { id: this.id, value: this.value }
+          return x
+        })
+        const options = {
+          method: 'POST',
+          url: '/UserSearchform',
+          data: Array.from(serialised),
+        };
+
+        // send the request
+        axios(options).then((response) => {
+          // console.log(response)
+          result = JSON.parse(response.data.data)
+          console.log(result)
+          
+
+        }, (error) => {
+          console.log(error);
+        });
+
+        console.log(serialised)
+      }
+    </script>
+  </div>
+</body>
+
+</html>
